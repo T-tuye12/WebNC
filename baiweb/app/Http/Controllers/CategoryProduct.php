@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use Session;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryProduct extends Controller
 {
@@ -11,7 +15,9 @@ class CategoryProduct extends Controller
 
     }
     public function all_category_product(){
-        return view('admin.all_category_product');
+        $all_category_product=DB::table('tbl_category_product')->get();
+        $manager_category_product=view('admin.all_category_product')->with('all_category_product',$all_category_product);
+        return view('admin_layout')->with('admin.all_category_product',$manager_category_product);
     }
     public function save_category_product(Request $request){
         //$this->AuthLogin();
@@ -19,12 +25,10 @@ class CategoryProduct extends Controller
         $data['category_name'] = $request->category_product_name;
         $data['category_desc'] = $request->category_product_desc;
         $data['category_status'] = $request->category_product_status;
-        //DB::table('tbl_category_product')->insert($data);
-        //Session::put('message','Thêm danh mục sản phẩm thành công');
-        //return Redirect::to('add-category-product');
-        echo'<pre>';
-        print_r($data);
-        echo'<pre>';
+        DB::table('tbl_category_product')->insert($data);
+        Session::put('message','Thêm danh mục sản phẩm thành công');
+        return Redirect::to('add-category-product');
+        
     }
 
 }

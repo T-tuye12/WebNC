@@ -7,6 +7,14 @@
                             Thêm danh mục sản phẩm
                         </header>
                         <div class="panel-body">
+                        <?php
+                            $message = Session::get('message');
+                            if($message){
+                            echo '<span style="color: red; width: 100%;
+                            text-align: center;">'.$message.'</span>';
+                            Session::put('message',null);
+                        }
+                        ?>
                             <div class="position-center">
                                 <form role="form" action ="{{URL::to('/save-category-product')}}" method="post">
                                     {{csrf_field()}}

@@ -35,21 +35,29 @@
                                     </th>
                                     <th>Tên danh mục</th>
                                     <th>Ẩn</th>
-                                    <th>Hiển thị</th>
                                     <th style="width:30px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($all_category_product as $key =>$cate_pro)
                                 <tr>
                                     <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                                    <td>Idrawfast prototype design prototype design prototype design prototype design prototype design</td>
-                                    <td><span class="text-ellipsis">Ẩn/Hiển thị</span></td>
-                                    <td><span class="text-ellipsis">26/12/2021</span></td>
+                                    <td>{{$cate_pro->category_name}}</td>
+                                    <td><span class="text-ellipsis">
+                                        <?php
+                                        if($cate_pro->category_status==0){
+                                            echo 'Ẩn';
+                                        }else {
+                                            echo 'Hiện';
+                                        }
+                                        ?>
+
+                                    </span></td>
                                     <td>
                                     <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o textsuccess text-active"></i><i class="fa fa-times text-danger text"></i></a>
                                     </td>
                                 </tr>
-                    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
